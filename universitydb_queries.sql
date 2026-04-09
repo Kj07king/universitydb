@@ -16,10 +16,9 @@ WHERE s.last_name = 'Kimtani'
   AND e.semester = 'Fall2024';
   
   -- 3.Delete Old Attendence Records( remove the comments if you want it to work)
-  /*
 DELETE FROM Attendance 
 WHERE attendance_date < '2024-01-01';
-  */
+
   -- 4.Instructor course Load Report
   SELECT 
     i.first_name, 
@@ -101,7 +100,7 @@ INNER JOIN Timetable t ON c.course_id = t.course_id
 WHERE t.day_of_week = 'Monday'
 ORDER BY t.start_time;
 
--- Room Utilization Report (Find which rooms are occupied during 09:00-11:00 time slot)
+-- 11.Room Utilization Report (Find which rooms are occupied during 09:00-11:00 time slot)
 SELECT 
     t.room_number,
     t.day_of_week,
@@ -118,7 +117,7 @@ WHERE t.start_time >= '09:00:00'
   AND t.start_time <= '11:00:00'
 ORDER BY t.day_of_week, t.start_time;
 
--- Student Performance Summary( For Kabir Kimtani)
+-- 12.Student Performance Summary( For Kabir Kimtani)
 SELECT 
     s.first_name,
     s.last_name,
@@ -127,7 +126,7 @@ SELECT
     c.credits,
     e.semester,
     e.grade,
-    -- Grade description
+    
     CASE 
         WHEN e.grade = '1' THEN 'Excellent (90-100%)'
         WHEN e.grade = '2' THEN 'Good (75-89%)'
@@ -137,20 +136,20 @@ SELECT
         WHEN e.grade = '6' THEN 'Fail (0-24%)'
         ELSE 'Not graded yet'
     END AS grade_description,
-    -- Attendance calculation
+   
     COUNT(DISTINCT a.attendance_id) AS total_attendance_records,
     SUM(CASE WHEN a.status = 'Present' THEN 1 ELSE 0 END) AS present_days,
     SUM(CASE WHEN a.status = 'Late' THEN 1 ELSE 0 END) AS late_days,
     SUM(CASE WHEN a.status = 'Absent' THEN 1 ELSE 0 END) AS absent_days,
     SUM(CASE WHEN a.status = 'Excused' THEN 1 ELSE 0 END) AS excused_days,
-    -- Attendance percentage
+
     ROUND(100.0 * SUM(CASE WHEN a.status IN ('Present', 'Late') THEN 1 ELSE 0 END) / 
           NULLIF(COUNT(a.attendance_id), 0), 1) AS attendance_percentage
 FROM Students s
 INNER JOIN Enrollments e ON s.student_id = e.student_id
 INNER JOIN Courses c ON e.course_id = c.course_id
 LEFT JOIN Attendance a ON e.enrollment_id = a.enrollment_id
-WHERE s.last_name = 'Kimtani'  -- Change this for other students
+WHERE s.last_name = 'Kimtani' 
 GROUP BY s.student_id, s.first_name, s.last_name, 
          c.course_id, c.course_title, c.credits, e.semester, e.grade
 ORDER BY e.semester DESC, c.course_title;
