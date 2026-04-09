@@ -17,7 +17,8 @@ WHERE s.last_name = 'Kimtani'
   
   -- 3.Delete Old Attendence Records
 DELETE FROM Attendance 
-WHERE attendance_date < '2024-01-01';
+WHERE attendance_date < '2024-01-01' 
+AND attendance_id > 0; 
 
   -- 4.Instructor course Load Report
   SELECT 
