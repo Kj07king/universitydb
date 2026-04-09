@@ -127,7 +127,6 @@ SELECT
     c.credits,
     e.semester,
     e.grade,
-    
     CASE 
         WHEN e.grade = '1' THEN 'Excellent (90-100%)'
         WHEN e.grade = '2' THEN 'Good (75-89%)'
@@ -137,13 +136,11 @@ SELECT
         WHEN e.grade = '6' THEN 'Fail (0-24%)'
         ELSE 'Not graded yet'
     END AS grade_description,
-   
     COUNT(DISTINCT a.attendance_id) AS total_attendance_records,
     SUM(CASE WHEN a.status = 'Present' THEN 1 ELSE 0 END) AS present_days,
     SUM(CASE WHEN a.status = 'Late' THEN 1 ELSE 0 END) AS late_days,
     SUM(CASE WHEN a.status = 'Absent' THEN 1 ELSE 0 END) AS absent_days,
     SUM(CASE WHEN a.status = 'Excused' THEN 1 ELSE 0 END) AS excused_days,
-
     ROUND(100.0 * SUM(CASE WHEN a.status IN ('Present', 'Late') THEN 1 ELSE 0 END) / 
           NULLIF(COUNT(a.attendance_id), 0), 1) AS attendance_percentage
 FROM Students s
