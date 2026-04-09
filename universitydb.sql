@@ -25,16 +25,11 @@ CREATE TABLE Instructors (
 );
 
 INSERT INTO Instructors (first_name, last_name, email, dept_id) VALUES
--- Economics (dept_id = 1)
 ('Lisa', 'Cuddy', 'lisa.cuddy@university.edu', 1),
--- Business Administration (dept_id = 2)
 ('Vito', 'Corleone', 'vito.corleone@university.edu', 2),
--- Software Engineering (dept_id = 3)
 ('Linus', 'Torvalds', 'linus.torvalds@university.edu', 3),
--- Computer Science (dept_id = 4)
 ('Tyler', 'Durden', 'tyler.durden@university.edu', 4),
 ('Antonio', 'Montana', 'antonio.montana@university.edu', 4),
--- Psychology (dept_id = 5)
 ('Dr. Gregory', 'House', 'gregory.house@university.edu', 5);
 
 CREATE TABLE Courses (
