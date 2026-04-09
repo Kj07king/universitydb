@@ -62,7 +62,7 @@ SELECT DISTINCT
     s.first_name,
     s.last_name,
     s.email,
-    c.course5_title,
+    c.course_title,
     e.exam_type,
     e.exam_date
 FROM Students s
