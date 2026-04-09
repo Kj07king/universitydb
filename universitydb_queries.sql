@@ -15,7 +15,7 @@ WHERE s.last_name = 'Kimtani'
   AND c.course_title = 'Introduction to Programming'
   AND e.semester = 'Fall2024';
   
-  -- 3.Delete Old Attendence Records( remove the comments if you want it to work)
+  -- 3.Delete Old Attendence Records
 DELETE FROM Attendance 
 WHERE attendance_date < '2024-01-01';
 
